@@ -1,0 +1,19 @@
+services:
+  cache:
+    container_name: url-shortener-cache
+    image: redis
+    ports:
+      - "6379:6379"
+
+  db:
+    container_name: url-shortener-db
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - shortened-urls-volume:/etc/data
+    environment:
+    - POSTGRES_HOST_AUTH_METHOD=trust
+
+volumes:
+  shortened-urls-volume:
